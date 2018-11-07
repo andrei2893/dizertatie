@@ -13,6 +13,14 @@
         <md-table-cell>{{comment.text}}</md-table-cell>
       </md-table-row>
     </md-table>
+
+    <md-list>
+      <md-list-item v-for="alert in alerts" :key="alert.id">
+        <md-icon>warning</md-icon>
+        <span class="md-list-item-text">{{alert.text}}</span>
+        
+      </md-list-item>
+    </md-list>
   </div>
 </template>
 
@@ -20,6 +28,7 @@
 import Header from '@/components/Header.vue';
 import Login from '@/components/Login.vue';
 import {findAllComments} from '@/api/comment.js';
+import {findAllAlerts} from '@/api/alert.js';
 
 export default {
   name: 'app',
@@ -29,12 +38,16 @@ export default {
   },
   data() {
     return {
-      comments: []
+      comments: [], 
+      alerts: [],
     }
   },
   mounted() {
     findAllComments().then((response) => {
       this.comments = response;
+    })
+    findAllAlerts().then((response) => {
+      this.alerts = response;
     })
   }
 }
