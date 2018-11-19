@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="login">
     </div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
 
 
 <style scoped>
-
+.login {
+    height: 50px;
+    
+}
 </style>
 

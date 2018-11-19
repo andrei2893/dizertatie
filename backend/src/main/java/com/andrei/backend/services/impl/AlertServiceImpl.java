@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -34,6 +36,8 @@ public class AlertServiceImpl implements AlertService {
             alertDTOS.add(dto);
         }
 
-        return alertDTOS;
+        return alertDTOS.stream()
+                .sorted(Comparator.comparing(AlertDTO::getDate).reversed())
+                .collect(Collectors.toList());
     }
 }

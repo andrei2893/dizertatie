@@ -31,4 +31,17 @@ public class CommentServiceImpl implements CommentService {
         }
         return commentDTOs;
     }
+
+    @Override
+    public List<CommentDTO> findByAlertId(Long alertId) {
+        List<Comment> comments = commentRepository.findByAlertId(alertId);
+        List<CommentDTO> commentDTOs = new ArrayList<>();
+        for (Comment comment : comments) {
+            CommentDTO dto = new CommentDTO();
+            dto.setId(comment.getId());
+            dto.setText(comment.getText());
+            commentDTOs.add(dto);
+        }
+        return commentDTOs;
+    }
 }
