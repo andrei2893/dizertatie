@@ -1,7 +1,17 @@
 package com.andrei.backend.model;
 
 public enum Role {
-    BASIC,
-    CLERK,
-    ADMIN
+    BASIC("BASIC"),
+    CLERK("CLERK"),
+    ADMIN("ADMIN");
+
+    private String value;
+
+    Role(String role) {
+        this.value = role;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

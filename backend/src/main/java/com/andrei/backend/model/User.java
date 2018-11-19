@@ -8,6 +8,7 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;
+    private String password;
     private String email;
     private String address;
 
@@ -28,6 +29,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
