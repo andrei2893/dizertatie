@@ -1,6 +1,5 @@
 let myHeaders = new Headers();
 myHeaders.append('Content-Type', 'application/json');
-myHeaders.append('Authorization', 'Basic '+ btoa('admin:admin'))
 
 const myInit = {
     method: 'GET',
@@ -8,5 +7,5 @@ const myInit = {
 };
 
 export function findAllAlerts() {
-    return fetch(new Request('/api/alert/list'), myInit).then((response) => response.json());
+    return fetch(new Request('/api/free/alert/list'), myInit).then((response) => response.json());
 }

@@ -1,8 +1,6 @@
 package com.andrei.backend;
 
 import com.andrei.backend.security.RestAuthenticationEntryPoint;
-import com.andrei.backend.security.RestSavedRequestAwareAuthenticationSuccessHandler;
-import com.andrei.backend.services.RestUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,51 +8,44 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-    private final RestUserDetailsService restUserDetailsService;
+    private final UserDetailsService userDetailsService;
 
 
     public SecurityConfig(RestAuthenticationEntryPoint restAuthenticationEntryPoint,
-                          RestUserDetailsService restUserDetailsService) {
+                          UserDetailsService userDetailsService) {
         this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
-        this.restUserDetailsService = restUserDetailsService;
-    }
-
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(encoder().encode("adminPass")).roles("ADMIN");
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .exceptionHandling()
+                .httpBasic()
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/auth/**").authenticated()
+                .antMatchers("/api/free/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
-                .formLogin()
-                .successHandler(new RestSavedRequestAwareAuthenticationSuccessHandler())
-                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
-                .and()
-                .logout();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        auth.userDetailsService(restUserDetailsService).passwordEncoder(passwordEncoder);
+        PasswordEncoder passwordEncoder = encoder();
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Bean

@@ -19,9 +19,9 @@ public class BackendApplication {
 	private static void init(ConfigurableApplicationContext run) {
         UserRepository userRepository = run.getBeanFactory().getBean(UserRepository.class);
         PasswordEncoder passwordEncoder = run.getBeanFactory().getBean(PasswordEncoder.class);
-        if (userRepository.findByEmail("admin")==null){
+        if (userRepository.findByEmail("admin@admin.admin") == null) {
             User user = new User();
-            user.setEmail("admin");
+            user.setEmail("admin@admin.admin");
             user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
             userRepository.save(user);

@@ -2,6 +2,7 @@ package com.andrei.backend.controllers;
 
 
 import com.andrei.backend.dto.AlertDTO;
+import com.andrei.backend.dto.CommentDTO;
 import com.andrei.backend.model.Alert;
 import com.andrei.backend.services.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/alert")
+@RequestMapping("/api")
 public class AlertController {
     private  final AlertService alertService;
 
@@ -22,7 +23,7 @@ public class AlertController {
 
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/free/alert/list", method = RequestMethod.GET)
     public List<AlertDTO> finalAll(){
         return alertService.findAll();
     }
