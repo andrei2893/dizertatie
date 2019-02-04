@@ -38,6 +38,7 @@ export default {
 
 body {
   margin: 0;
+  background: no-repeat center/150% url("./assets/poza.jpg");
 }
 
 .md-button-content{

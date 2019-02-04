@@ -15,36 +15,63 @@
         </md-toolbar>
 
         <md-list>
-            <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Inbox</span>
-            </md-list-item>
+            <router-link :to="'/'">
+                <md-list-item>  
+                    <md-icon>send</md-icon>
+                    <span class="md-list-item-text">Alerts</span>
+                </md-list-item>
+            </router-link>
+            <router-link :to="'/clerk/alert'" v-if="isClerk"> 
+                <md-list-item>  
+                    <md-icon>send</md-icon>
+                    <span class="md-list-item-text">Create alert</span>
+                </md-list-item>
+            </router-link>
 
-            <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
-            </md-list-item>
-
-            <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Trash</span>
-            </md-list-item>
-
-            <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
-            </md-list-item>
+            <router-link :to="'/admin/user/insert'" v-if="isAdmin">
+                <md-list-item>  
+                    <md-icon>send</md-icon>
+                    <span class="md-list-item-text">Create user</span>
+                </md-list-item>
+            </router-link>
+            <router-link :to="'/admin/user/delete'" v-if="isAdmin">
+                <md-list-item>  
+                    <md-icon>send</md-icon>
+                    <span class="md-list-item-text">Delete user</span>
+                </md-list-item>
+            </router-link>
         </md-list>
         </md-drawer>
     </div>
 </template>
 
 <script>
+import {userIsLoggedIn, getRole} from '@/storage'
+
 export default {
     data(){
         return{
-            showNavigation:false,
+            showNavigation: false, 
+            userIsLoggedIn: userIsLoggedIn(),
+            role: getRole(),
         }
+    },
+    mounted() {
+    },
+    computed: {
+        isLoggedOut() {
+            return !this.userIsLoggedIn
+        },
+        isBasicUser() {
+            return this.userIsLoggedIn && this.role === 'BASIC'
+        },
+        isClerk() {
+            return this.userIsLoggedIn && this.role === 'CLERK'
+        },
+        isAdmin() {
+            return this.userIsLoggedIn && this.role === 'ADMIN'
+        }
+
     }
 
 }

@@ -177,7 +177,7 @@ export default {
                 if (!ok) {
                     this.showRegisterError= true
                 } else {
-                    const credentials = 'Basic '+btoa(this.reg.email+':'+this.reg.password)
+                    const credentials = 'Basic ' + btoa(this.reg.email+':'+this.reg.password)
                     findUserByEmail(this.reg.email, credentials).then((response) => {
                         if (response === false) {
                             this.showLoginError = true
