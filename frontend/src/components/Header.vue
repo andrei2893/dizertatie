@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="header-item"> 
-            <md-button class="md-icon-button" @click="showNavigation = true">
+            <md-button class="md-icon-button" @click="showNavigation = true" v-show="!showNavigation">
                 <md-icon>menu</md-icon>
             </md-button>
         </div>
@@ -11,33 +11,45 @@
        
        <md-drawer :md-active.sync="showNavigation" class="drower">
         <md-toolbar class="md-transparent" md-elevation="0">
-            <span class="md-title">Menu</span>
+            <span class="md-title color-white">Menu</span>
         </md-toolbar>
 
-        <md-list>
+        <md-list class="drower-bk">
             <router-link :to="'/'">
                 <md-list-item>  
-                    <md-icon>send</md-icon>
-                    <span class="md-list-item-text">Alerts</span>
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Alerts</span>
                 </md-list-item>
             </router-link>
-            <router-link :to="'/clerk/alert'" v-if="isClerk"> 
+             <router-link :to="'/announcements'">
                 <md-list-item>  
-                    <md-icon>send</md-icon>
-                    <span class="md-list-item-text">Create alert</span>
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Announcements</span>
+                </md-list-item>
+            </router-link>
+            <router-link :to="'/clerk/alert'" v-if="isClerk || isAdmin"> 
+                <md-list-item>  
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Create alert</span>
+                </md-list-item>
+            </router-link>
+            <router-link :to="'/announcements/create'" v-if="isBasicUser || isClerk || isAdmin"> 
+                <md-list-item>  
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Create announcement</span>
                 </md-list-item>
             </router-link>
 
             <router-link :to="'/admin/user/insert'" v-if="isAdmin">
                 <md-list-item>  
-                    <md-icon>send</md-icon>
-                    <span class="md-list-item-text">Create user</span>
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Create user</span>
                 </md-list-item>
             </router-link>
             <router-link :to="'/admin/user/delete'" v-if="isAdmin">
                 <md-list-item>  
-                    <md-icon>send</md-icon>
-                    <span class="md-list-item-text">Delete user</span>
+                    <md-icon class="color-white">send</md-icon>
+                    <span class="md-list-item-text color-white">Delete user</span>
                 </md-list-item>
             </router-link>
         </md-list>
@@ -96,6 +108,16 @@ export default {
     height: 100%;
 }
 .drower{
-    width:200px;
+    width:250px;
+
+    background: transparent;
+}
+.drower-bk{
+    color: white !important;
+
+    background: transparent;
+}
+.color-white{
+    color: white !important;
 }
 </style>

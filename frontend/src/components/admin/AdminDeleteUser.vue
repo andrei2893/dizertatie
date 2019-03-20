@@ -1,19 +1,22 @@
 <template>
-    <div>
-        <md-list>
+    <div class="delete-user">
+        <md-list  class="orange-bk">
             <md-list-item v-for="user of users" :key="user.id">
                 <md-checkbox v-model="idsToBeDeleted" :value="user.id">
-                    {{user.name}}
                 </md-checkbox>
-                <span>
+                <div class="row-item">
+                    {{user.name}}
+                </div>
+                <div class="row-item">
                     {{user.email}}
-                </span>
+                </div>
+                <div>
+                    {{user.role}}
+                </div>
             </md-list-item>
-            <md-list-item>
-                <md-button class="md-primary" @click="deleteUsers" :disabled="!idsToBeDeleted.length">
-                    delete
-                    </md-button>
-            </md-list-item>
+            <md-button class="md-primary" @click="deleteUsers" :disabled="!idsToBeDeleted.length">
+                delete
+            </md-button>
         </md-list>
     </div>
 </template>
@@ -47,5 +50,12 @@ export default {
 </script>
 
 <style>
+.delete-user{
+    width: 800px;
 
+}
+.row-item{
+    width: 400px;
+
+}
 </style>

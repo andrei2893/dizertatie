@@ -18,18 +18,23 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @RequestMapping(value = "/free/comment/list", method = RequestMethod.GET)
-    public List<CommentDTO> findAll(){
-        return commentService.findAll();
-    }
-
     @RequestMapping(value = "/free/comment/alert/{alertId}", method = RequestMethod.GET)
     public List<CommentDTO> findByAlertId(@PathVariable Long alertId){
         return commentService.findByAlertId(alertId);
     }
 
-    @RequestMapping(value = "/auth/comment", method = RequestMethod.POST)
-    public CommentDTO submitComment(@RequestBody NewCommentDTO dto){
-        return commentService.submitComment(dto);
+    @RequestMapping(value = "/free/comment/announcement/{announcementId}", method = RequestMethod.GET)
+    public List<CommentDTO> findByAnnouncementId(@PathVariable Long announcementId){
+        return commentService.findByAnnouncementId(announcementId);
+    }
+
+    @RequestMapping(value = "/auth/comment/alert", method = RequestMethod.POST)
+    public CommentDTO submitAlertComment(@RequestBody NewCommentDTO dto){
+        return commentService.submitAlertComment(dto);
+    }
+
+    @RequestMapping(value = "/auth/comment/announcement", method = RequestMethod.POST)
+    public CommentDTO submitAnnouncementComment(@RequestBody NewCommentDTO dto){
+        return commentService.submitAnnouncementComment(dto);
     }
 }

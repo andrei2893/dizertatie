@@ -1,6 +1,8 @@
 import VueRouter from 'vue-router'
 import App from '@/App.vue'
 import Alerts from '@/components/Alerts.vue'
+import Announcements from '@/components/Announcements.vue'
+import CreateAnnouncement from '@/components/basic/CreateAnnouncement.vue'
 import ClerkAlert from '@/components/clerk/ClerkAlert.vue'
 import AdminDeleteUser from '@/components/admin/AdminDeleteUser.vue'
 import AdminInsertUser from '@/components/admin/AdminInsertUser.vue'
@@ -10,6 +12,14 @@ const router = new VueRouter({
         {
             path: '/', 
             component: Alerts,
+        },
+        {
+            path: '/announcements', 
+            component: Announcements,
+        },
+        {
+            path: '/announcements/create', 
+            component: CreateAnnouncement,
         },
         {
             path: '/clerk/alert',

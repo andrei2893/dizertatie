@@ -5,9 +5,12 @@ import java.util.Date;
 public class AlertDTO {
     private Long id;
     private String text;
+    private String address;
     private String title;
     private Date date;
-    private  String username;
+    private Long userId;
+    private Float lat;
+    private Float lng;
 
     public Long getId() {
         return id;
@@ -41,11 +44,36 @@ public class AlertDTO {
         this.date = date;
     }
 
-    public String getUsername() {
-        return username;
+
+    public Float getLat() {
+        return lat;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLat(Float lat) {
+        this.lat = lat;
+    }
+
+    public Float getLng() {
+        return lng;
+    }
+
+    public void setLng(Float lng) {
+        this.lng = lng;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

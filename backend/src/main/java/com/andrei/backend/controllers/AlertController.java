@@ -6,6 +6,7 @@ import com.andrei.backend.dto.CommentDTO;
 import com.andrei.backend.model.Alert;
 import com.andrei.backend.services.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,5 +27,10 @@ public class AlertController {
     @RequestMapping(value = "/free/alert/list", method = RequestMethod.GET)
     public List<AlertDTO> finalAll(){
         return alertService.findAll();
+    }
+
+    @RequestMapping(value = "/auth/alert", method = RequestMethod.POST)
+    public void save(@RequestBody AlertDTO dto){
+        alertService.save(dto);
     }
 }

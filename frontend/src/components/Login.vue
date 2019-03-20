@@ -4,7 +4,7 @@
         <md-button class="md-dense md-primary" v-if="!userLoggedIn" @click="showRegisterDialog">Register</md-button>
         <md-button class="md-dense md-primary" v-if="userLoggedIn" @click="logout">Logout</md-button>
 
-        <md-dialog :md-active.sync="loginDialogVisible">
+        <md-dialog :md-active.sync="loginDialogVisible"  class="orange-bk">
             <md-dialog-title>Login</md-dialog-title>
 
             <form novalidate class="md-layout login-form" @submit.prevent="validateUser">
@@ -16,14 +16,14 @@
                 </md-field>
                 <md-field :class="getValidationClass('password')">
                     <label for="password">Password</label>
-                    <md-input name="password" id="password" v-model="form.password" />
+                    <md-input name="password" id="password" type="password" v-model="form.password" />
                     <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
                 </md-field>  
                 <md-button type="submit" class="md-primary" @click="login">login</md-button>
             </form>
         </md-dialog>
 
-        <md-dialog :md-active.sync="registerDialogVisible">
+        <md-dialog :md-active.sync="registerDialogVisible" class="orange-bk">
             <md-dialog-title>Register</md-dialog-title>
 
             <form novalidate class="md-layout login-form" @submit.prevent="validateUserForRegister">
@@ -35,7 +35,7 @@
                 </md-field>
                 <md-field :class="getValidationClassForReg('password')">
                     <label for="password">Password</label>
-                    <md-input name="password" id="password" v-model="reg.password" />
+                    <md-input name="password" id="password" type="password" v-model="reg.password" />
                     <span class="md-error" v-if="!$v.reg.password.required">The password is required</span>
                 </md-field>
                 <md-field :class="getValidationClassForReg('name')">
@@ -67,7 +67,7 @@
 import { validationMixin } from 'vuelidate'
 import {required,email} from 'vuelidate/lib/validators'
 import {findUserByEmail,register} from '@/api/user'
-import {saveCredentials,userIsLoggedIn,deleteCredentials,setRole,setUserId} from '@/storage'
+import {saveCredentials,userIsLoggedIn,deleteCredentials,setRole,setUserId, deleteUserId} from '@/storage'
 
 
 export default {
@@ -159,6 +159,7 @@ export default {
         logout() {
             deleteCredentials()
             this.userLoggedIn = false
+            deleteUserId()
         },
         validateUser() {
             this.$v.$touch()

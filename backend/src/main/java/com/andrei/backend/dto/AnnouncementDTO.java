@@ -1,9 +1,20 @@
 package com.andrei.backend.dto;
 
-public class NewCommentDTO {
+import java.util.Date;
+
+public class AnnouncementDTO {
+    private Long id;
     private String text;
-    private Long entityId;
+    private Date date;
     private Long userId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;
@@ -13,12 +24,12 @@ public class NewCommentDTO {
         this.text = text;
     }
 
-    public Long getEntityId() {
-        return entityId;
+    public Date getDate() {
+        return date;
     }
 
-    public void setEntityId(Long entityId) {
-        this.entityId = entityId;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Long getUserId() {

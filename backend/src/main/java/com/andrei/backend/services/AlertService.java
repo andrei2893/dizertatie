@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AlertService {
     List<AlertDTO> findAll();
+
+    void save(AlertDTO dto);
 }

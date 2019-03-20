@@ -5,8 +5,11 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import router from '@/router.js'
 
+
+
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
+
 
 Vue.config.productionTip = false
 

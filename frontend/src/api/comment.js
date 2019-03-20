@@ -23,9 +23,21 @@ export function findCommentsForAlert(alertId) {
     .then((response) => response.json());
 }
 
+export function findCommentsForAnnouncement(announcementId) {
+    return fetch(new Request(`/api/free/comment/announcement/${announcementId}`), init('GET', makeHeaders()))
+    .then((response) => response.json());
+}
+
 export function submitComment(dto) {
     const headers = makeHeaders()
     headers.append('Authorization', getCredentials())
-    return fetch(new Request(`/api/auth/comment`), init('POST', headers,JSON.stringify(dto)))
+    return fetch(new Request(`/api/auth/comment/alert`), init('POST', headers,JSON.stringify(dto)))
+    .then((response) => response.json());
+}
+
+export function submitAnnouncementComment(dto) {
+    const headers = makeHeaders()
+    headers.append('Authorization', getCredentials())
+    return fetch(new Request(`/api/auth/comment/announcement`), init('POST', headers,JSON.stringify(dto)))
     .then((response) => response.json());
 }

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <md-card>
+    <div class="register-clerk">
+        <md-card  class="orange-bk">
             <md-card-header>
                 <div class="md-title">Register Clerk</div>
             </md-card-header>
@@ -107,5 +107,8 @@ export default {
 </script>
 
 <style>
+.register-clerk {
+    width: 800px;
 
+}
 </style>

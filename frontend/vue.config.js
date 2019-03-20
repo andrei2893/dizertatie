@@ -6,6 +6,11 @@ module.exports = {
                 ws: false,
                 changeOrigin: true
             },
+            '/data': {
+                target: 'https://api.openweathermap.org',
+                ws: false,
+                changeOrigin: true
+            },
         }
     }
 }

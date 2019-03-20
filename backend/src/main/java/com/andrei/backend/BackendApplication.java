@@ -22,6 +22,7 @@ public class BackendApplication {
         if (userRepository.findByEmail("admin@admin.admin") == null) {
             User user = new User();
             user.setEmail("admin@admin.admin");
+            user.setName("admin");
             user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
             userRepository.save(user);

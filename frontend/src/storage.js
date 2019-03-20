@@ -30,3 +30,6 @@ export function setUserId(userId){
 export function getUserId(){
     return window.localStorage.getItem(userIdKey)
 }
+export function deleteUserId(){
+    window.localStorage.removeItem(userIdKey)
+}

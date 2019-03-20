@@ -1,10 +1,8 @@
 package com.andrei.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Alert {
@@ -16,6 +14,11 @@ public class Alert {
     private String text;
     private String title;
     private Date date;
+    private Float lat;
+    private Float lng;
+    private String address;
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -57,5 +60,35 @@ public class Alert {
         this.text = text;
     }
 
+    public Float getLat() {
+        return lat;
+    }
 
+    public void setLat(Float lat) {
+        this.lat = lat;
+    }
+
+    public Float getLng() {
+        return lng;
+    }
+
+    public void setLng(Float lng) {
+        this.lng = lng;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
